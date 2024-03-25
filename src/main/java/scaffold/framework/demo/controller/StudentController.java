@@ -28,8 +28,9 @@ public class StudentController {
     }
 
     @GetMapping("/list")
-    public String listStudents(Model model) {
-        model.addAttribute("students", studentService.findAll());
+    public String listStudents(Model model, @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        model.addAttribute("students", studentService.findAll(page > 0 ? page : 0, size));
         model.addAttribute("promotions", promotionService.findAll());
         return "pages/student/list";
     }

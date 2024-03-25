@@ -1,7 +1,7 @@
 package scaffold.framework.demo.service;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import scaffold.framework.demo.entity.Student;
@@ -20,8 +20,8 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    public Page<Student> findAll(int pageNumber, int itemCount) {
+        return studentRepository.findAll(PageRequest.of(pageNumber, itemCount));
     }
 
     public Student findById(Long id) {
